@@ -16,3 +16,17 @@ data class Film (
     val genre: String,
     val rating_usia: String,
 )
+
+@Serializable
+data class FilmResponseDetail(
+    val status: Boolean,
+    val message: String,
+    val data: Film
+)
+
+@Serializable
+data class FilmResponse(
+    val status: Boolean,
+    val message: String,
+    val data: List<Film>
+)
