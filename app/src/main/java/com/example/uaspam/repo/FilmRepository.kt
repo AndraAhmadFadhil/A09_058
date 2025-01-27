@@ -15,3 +15,38 @@ interface FilmRepository{
     suspend fun getFilmById(id_film: Int): FilmResponseDetail
 }
 
+class NetworkFilmRepository(
+
+    private val FilmApiService: FilmService
+): FilmRepository{
+    override suspend fun getFilm(): FilmResponse {
+        return FilmApiService.getFilm()
+    }
+
+    override suspend fun insertFilm(film: Film) {
+        FilmApiService.insertFilm(film)
+    }
+
+    override suspend fun updateFilm(id_film: Int, film: Film) {
+        FilmApiService.updateFilm(id_film, film)
+    }
+
+    override suspend fun deleteFilm(id_film: Int) {
+        try {
+            val response = FilmApiService.deleteFilm(id_film)
+            if (!response.isSuccessful){
+                throw IOException("Failed to delete Film. HTTP Status code:" +
+                        "${response.code()}")
+            } else {
+                response.message()
+                println(response.message())
+            }
+        } catch (e: Exception){
+            throw e
+        }
+    }
+
+    override suspend fun getFilmById(id_film: Int): FilmResponseDetail {
+        return FilmApiService.getFilmById(id_film)
+    }
+}
