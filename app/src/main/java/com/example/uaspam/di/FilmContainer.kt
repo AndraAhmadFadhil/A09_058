@@ -1,15 +1,19 @@
 package com.example.uaspam.di
 
 import com.example.uaspam.model.Penayangan
+import com.example.uaspam.model.Tiket
 import com.example.uaspam.repo.FilmRepository
 import com.example.uaspam.repo.NetworkFilmRepository
 import com.example.uaspam.repo.NetworkPenayanganRepository
 import com.example.uaspam.repo.NetworkStudioRepository
+import com.example.uaspam.repo.NetworkTiketRepository
 import com.example.uaspam.repo.PenayanganRepository
 import com.example.uaspam.repo.StudioRepository
+import com.example.uaspam.repo.TiketRepository
 import com.example.uaspam.service.FilmService
 import com.example.uaspam.service.PenayanganService
 import com.example.uaspam.service.StudioService
+import com.example.uaspam.service.TiketService
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
@@ -19,7 +23,7 @@ interface AppContainer{
     val FilmRepository: FilmRepository
     val StudioRepository: StudioRepository
     val PenayanganRepository: PenayanganRepository
-    //tambahin tabel lainnya juga ntar
+    val TiketRepository: TiketRepository
 }
 
 class FilmContainer: AppContainer{
@@ -54,6 +58,13 @@ class FilmContainer: AppContainer{
         NetworkPenayanganRepository(penayanganService)
     }
 
+    private val tiketService: TiketService by lazy {
+        retrofit.create(TiketService::class.java)
+    }
+
+    override val TiketRepository: TiketRepository by lazy {
+        NetworkTiketRepository(tiketService)
+    }
 
 
 
