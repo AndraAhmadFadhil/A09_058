@@ -207,21 +207,13 @@ fun FilmCard(
             modifier = Modifier.padding(16.dp)
         ) {
             Text(text = "Judul: ${film.judul_film}", style = MaterialTheme.typography.titleLarge)
-            Text(text = "Durasi: ${film.durasi} menit", style = MaterialTheme.typography.bodyLarge)
-            Text(text = "Deskripsi: ${film.deskripsi}", style = MaterialTheme.typography.bodyMedium)
-            Text(text = "Genre: ${film.genre}", style = MaterialTheme.typography.bodyMedium)
-            Text(text = "Rating Usia: ${film.rating_usia}", style = MaterialTheme.typography.bodyMedium)
+
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.End
             ) {
-                IconButton(onClick = { onEditClick(film) }) {
-                    Icon(imageVector = Icons.Default.Edit, contentDescription = "Edit Film")
-                }
-                IconButton(onClick = { onDeleteClick(film) }) {
-                    Icon(imageVector = Icons.Default.Delete, contentDescription = "Delete Film")
-                }
+
             }
         }
     }
